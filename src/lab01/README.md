@@ -2,37 +2,37 @@
 
 ### Задание 1
 
-![](../../images/lab01/01_greeting.png)
+![](../../images/lab01/01_greeting.png)<br>
 *Результат выполнения скрипта 01_greeting.py (Привет и возраст)*
 
 ### Задание 2
 
-![](../../images/lab01/02_sum_avg.png)
+![](../../images/lab01/02_sum_avg.png)<br>
 *Результат выполнения скрипта 02_sum_avg.py (Сумма и среднее)*
 
 ### Задание 3
 
-![](../../images/lab01/03_discount_vat.png)
+![](../../images/lab01/03_discount_vat.png)<br>
 *Результат выполнения скрипта 03_discount_vat.py (Чек: скидка и НДС)*
 
 ### Задание 4
 
-![](../../images/lab01/04_minutes_to_hhmm.png)
+![](../../images/lab01/04_minutes_to_hhmm.png)<br>
 *Результат выполнения скрипта 04_minutes_to_hhmm.py (Минуты в ЧЧ:ММ)*
 
 ### Задание 5
 
-![](../../images/lab01/05_initials_and_len.png)
+![](../../images/lab01/05_initials_and_len.png)<br>
 *Результат выполнения скрипта 01_greeting.py (Инициалы и длина строки)*
 
 ### Задание 6*
 
-![](../../images/lab01/06_count.png)
+![](../../images/lab01/06_count.png)<br>
 *Результат выполнения скрипта 06_count.py (Подсчет участников)*
 
 ### Задание 7*
 
-![](../../images/lab01/07_decoding.png)
+![](../../images/lab01/07_decoding.png)<br>
 *Результат выполнения скрипта 07_decoding.py (Расшифровка строки)*
 
 
