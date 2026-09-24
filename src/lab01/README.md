@@ -2,4 +2,4 @@
 
 ### Задание 1
 
-![](../images/lab01/ex01.png)
+![](python_labs/images/lab01/ex01.png)
