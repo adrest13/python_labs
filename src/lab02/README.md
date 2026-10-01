@@ -1,6 +1,6 @@
 ## ЛР2 — Коллекции и матрицы (list/tuple/set/dict)
 
-### Задание 1
+### Задание 1 (arrays.py)
 Программа находит минимум и максимум. Затем выводит кортеж из этих 2 значений
 ```py
 def min_max(nums: list[float | int]) -> tuple[float | int, float | int]:
@@ -37,9 +37,9 @@ min_max
 ```
 
 ![](../../images/lab02/min_max.png)<br>
-*Результат выполнения функции min_max*
+*Результат выполнения функции min_max()*
 
-### Задание 2
+### Задание 2 (arrays.py)
 На вход подается список. Выводим отсортированный список без повторяющихся элементов
 ```py
 def unique_sorted(nums: list[float | int]) -> list[float | int]:
@@ -73,9 +73,9 @@ unique_sorted
 ```
 
 ![](../../images/lab02/unique_sorted.png)<br>
-*Результат выполнения функции unique_sorted*
+*Результат выполнения функции unique_sorted()*
 
-### Задание 3
+### Задание 3 (arrays.py)
 Программа расщепляет список из списков или кортежей в один список
 ```py
 def flatten(mat: list[list | tuple]) -> list[float | int]:
@@ -107,4 +107,121 @@ flatten
 ```
 
 ![](../../images/lab02/flatten.png)<br>
-*Результат выполнения функции flatten*
+*Результат выполнения функции flatten()*
+
+### Задание 4 (matrix.py)
+Подается матрица из матриц. В выходных данных получаем транспонированную матрицу
+```py
+def transpose(mat: list[list[float | int]]) -> list[list]:
+    """
+    This function transpose matrix
+    
+    Input data: list[float or int]
+    Output data: list[list]
+    Raises: ValueError('matrix has strings with different sizes'), TypeError('not a matrix')
+    """
+
+    if len(mat) == 0:
+        return []
+    if type(mat) != list:
+        raise TypeError('not a matrix')
+
+    if is_matrix_same(mat) != True: 
+        raise ValueError('matrix has strings with different sizes')
+    t = []
+    for i in range(len(mat[0])):
+        t.append([0] * len(mat))
+
+    for i in range(len(mat)):
+        for j in range(len(mat[0])):
+            t[j][i] = mat[i][j]
+    return t
+
+#Tests
+print(f'''
+transpose
+[[1, 2, 3]] -> {transpose([[1, 2, 3]])}
+[[1], [2], [3]] -> {transpose([[1], [2], [3]])}
+[[1, 2], [3, 4]] -> {transpose([[1, 2], [3, 4]])}
+[] -> {transpose([])}
+[[1, 2], [3]] -> {transpose([[1, 2], [3]])}
+''')
+```
+
+![](../../images/lab02/transpose.png)<br>
+*Результат выполнения transpose()*
+
+### Задание 5 (matrix.py)
+На вход подается список. Выводим сумму в каждой строке списка
+```py
+def row_sums(mat: list[list[float | int]]) -> list[float]:
+    """
+    This function takes sums of strings
+        
+    Input data: list[float or int]
+    Output data: list[float]
+    Raises: ValueError('matrix has strings with different sizes'), TypeError('not a matrix')
+    """
+    if len(mat) == 0:
+        return []
+    if type(mat) != list:
+        raise TypeError('not a matrix')
+    if is_matrix_same(mat) != True: 
+        raise ValueError('matrix has strings with different sizes')
+    
+    t = []
+    for lst in mat:
+        t.append(sum(lst))
+    return t
+
+#Tests
+print(f'''
+row_sums
+[[1, 2, 3], [4, 5, 6]] -> {row_sums([[1, 2, 3], [4, 5, 6]])}
+[[-1, 1], [10, -10]] -> {row_sums([[-1, 1], [10, -10]])}
+[[0, 0], [0, 0]] -> {row_sums([[0, 0], [0, 0]])}
+[[1, 2], [3]] -> {row_sums([[1, 2], [3]])}
+''')
+```
+
+![](../../images/lab02/row_sums.png)<br>
+*Результат выполнения функции row_sums()*
+
+### Задание 6 (matrix.py)
+На вход подается список. Выводим сумму в каждом столбце списка
+```py
+def col_sums(mat: list[list[float | int]]) -> list[float]:
+    """
+    This function takes sums of columns
+        
+    Input data: list[float or int]
+    Output data: list[float]
+    Raises: ValueError('matrix has strings with different sizes'), TypeError('not a matrix')
+    """
+    if len(mat) == 0:
+        return []
+    if type(mat) != list:
+        raise TypeError('not a matrix')
+    if is_matrix_same(mat) != True: 
+        raise ValueError('matrix has strings with different sizes')
+    
+    t = [0] * (len(mat[0]))
+
+    for lst in mat:
+        for i in range(len(lst)):
+            t[i] += lst[i]
+
+    return t
+
+#Tests
+print(f'''
+col_sums
+[[1, 2, 3], [4, 5, 6]] → {col_sums([[1, 2, 3], [4, 5, 6]])}
+[[-1, 1], [10, -10]] → {col_sums([[-1, 1], [10, -10]])}
+[[0, 0], [0, 0]] → {col_sums([[0, 0], [0, 0]])}
+[[1, 2], [3]] -> {col_sums([[1, 2], [3]])}
+''')
+```
+
+![](../../images/lab02/col_sums.png)<br>
+*Результат выполнения функции col_sums()*
