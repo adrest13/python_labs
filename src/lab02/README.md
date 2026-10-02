@@ -242,7 +242,7 @@ def format_record(rec: tuple[str, str, float]) -> str:
     ValueError('we need 3 elements in tuple')
     ValueError('you need to enter full fio')
     ValueError('grop can\'t be empty')
-    ValueError('we need 0 <= gpa <= 50')
+    ValueError('we need 0 <= gpa <= 5')
     """
 
     if type(rec) != tuple:
@@ -260,8 +260,8 @@ def format_record(rec: tuple[str, str, float]) -> str:
         raise ValueError('you need to enter full fio')
     if len(rec[1].strip()) == 0:
         raise ValueError('grop can\'t be empty')
-    if (rec[2] < 0) or (rec[2] > 50):
-        raise ValueError('we need 0 <= gpa <= 50')
+    if (rec[2] < 0) or (rec[2] > 5):
+        raise ValueError('we need 0 <= gpa <= 5')
 
     string = rec[0].strip().split()
     fio = ""
