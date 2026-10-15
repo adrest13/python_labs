@@ -72,7 +72,7 @@ def top_n(freq: dict[str, int], n: int = 5) -> list[tuple[str, int]]:
 *Результат выполнения функции count_freq() + top_n()*
 
 ## Задание B (text.stats.py)
-
+Программа получает на вход текст и выводит соответствующие параметры, используя функции из text.py
 ```py
 from src.lib.text import normalize, tokenize, count_freq, top_n
 
