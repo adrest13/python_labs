@@ -1,4 +1,4 @@
-from src.libraries.funcs import is_matrix_same
+from src.lib.funcs import is_matrix_same
 
 def transpose(mat: list[list[float | int]]) -> list[list]:
     """
