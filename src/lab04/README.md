@@ -65,15 +65,6 @@ def ensure_parent_dir(path: str | Path) -> None:
 ![](../../images/lab04/check_csv.png)<br>
 *Запись в CSV-файл*
 
-### Задание 2 (tokenize)
-Функция разделяет текст на массив, используя re.findall()
-```py
-
-```
-
-![](../../images/lab03/tokenize.png)<br>
-*Результат выполнения tokenize()*
-
 ## Задание B - скрипт `src/lab04/text_report.py`
 
 ### Исходный код `text_report.py`
