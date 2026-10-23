@@ -3,7 +3,7 @@
 ## Задание A - модуль ввода/вывода `src/lab04/io_txt_csv.py`
 
 ### Функция `read_text`
-
+Функция открывает текстовый файл по указанному пути и считывает всё его содержимое в одну строку. Также можно указать кодировку файла. По умолчанию используется UTF-8.
 ```py
 from pathlib import Path
 import csv
@@ -21,7 +21,7 @@ def read_text(path: str | Path, encoding: str = "utf-8") -> str:
 ```
 
 ### Функция `write_csv`
-
+Функция сохраняет полученные данные в CSV-файл. Каждая строка списка записывается как отдельная строка таблицы.
 ```py
 def write_csv(rows: Iterable[Sequence], path: str | Path, header: tuple[str, ...] | None = None) -> None:
     '''
@@ -48,7 +48,7 @@ def write_csv(rows: Iterable[Sequence], path: str | Path, header: tuple[str, ...
             w.writerow(r)
 ```
 ### Функция `ensure_parent_dir`
-
+Функция проверяет, существует ли папка, в которую нужно сохранить файл. Если папки нет, она автоматически создаётся вместе с необходимыми вложенными папками.
 ```py
 def ensure_parent_dir(path: str | Path) -> None:
     '''
@@ -66,9 +66,13 @@ def ensure_parent_dir(path: str | Path) -> None:
 *Запись в CSV-файл*
 
 ## Задание B - скрипт `src/lab04/text_report.py`
+Программа анализирует текстовые файлы и подсчитывает частоту слов.
+
+При обработке одного файла текст считывается, нормализуется и разбивается на слова. Результаты сохраняются в    `report.csv`, а в консоль выводятся количество всех слов, уникальных слов и топ-5 самых частых.
+
+При обработке нескольких файлов программа анализирует каждый файл отдельно и объединяет результаты. Создаются два отчёта: `report_per_file.csv` и `report_total.csv`. В консоль выводятся итоговые данные и топ-5 слов.
 
 ### Исходный код `text_report.py`
-
 ```py
 import argparse
 from src.lab04.io_txt_csv import read_text, write_csv
