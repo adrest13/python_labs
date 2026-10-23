@@ -199,5 +199,5 @@ else:
 ### Создаются 2 файла:
 ![](../../images/lab04/report_total.png)<br>
 *report_total.csv*
-![](../../images/lab04/report_per_file.png)<br>
+<br>![](../../images/lab04/report_per_file.png)<br>
 *report_per_file.csv*
