@@ -24,11 +24,13 @@ def write_csv(rows: Iterable[Sequence], path: str | Path, header: tuple[str, ...
     p = Path(path)
     rows = list(rows)
 
-    dlina = len(rows[0]);
-    for row in rows:
-        if len(row) != dlina:
-            raise ValueError("Strings have different sizes")
+    if len(rows) > 0:
+        dlina = len(rows[0])
+        for row in rows:
+            if len(row) != dlina:
+                raise ValueError("Strings have different sizes")
 
+    ensure_parent_dir(path)
     with p.open("w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
         if header is not None:

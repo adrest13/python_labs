@@ -65,6 +65,9 @@ def ensure_parent_dir(path: str | Path) -> None:
 ![](../../images/lab04/check_csv.png)<br>
 *Запись в CSV-файл*
 
+<br><br>![](../../images/lab04/check_csv_empty.png)<br>
+*Запись пустого файла в CSV*
+
 ## Задание B - скрипт `src/lab04/text_report.py`
 Программа анализирует текстовые файлы и подсчитывает частоту слов.
 
