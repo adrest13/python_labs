@@ -189,15 +189,15 @@ else:
 `--total` сводный отчёт
 
 ### Пример запуска для одного файла:
-<br>![](../../images/lab04/report_one_file.png)<br>
+![](../../images/lab04/report_one_file.png)<br>
 *Вызвано с помощью команды python -m src.lab04.text_report*
 
 ### Пример запуска для нескольких файлов:
-<br>![](../../images/lab04/report_many_files.png)<br>
+![](../../images/lab04/report_many_files.png)<br>
 *Вызвано с помощью команды python -m src.lab04.text_report --in data/lab04/a.txt data/lab04/b.txt*
 
 ### Создаются 2 файла:
-<br>![](../../images/lab04/report_total.png)<br>
+![](../../images/lab04/report_total.png)<br>
 *report_total.csv*
-<br>![](../../images/lab04/report_per_file.png)<br>
+![](../../images/lab04/report_per_file.png)<br>
 *report_per_file.csv*
