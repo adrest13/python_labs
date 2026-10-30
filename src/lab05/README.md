@@ -6,6 +6,13 @@
 Функция `json_to_csv()` преобразует данные из JSON-файла в CSV-файл.
 Сначала она проверяет существование и формат JSON-файла, затем считывает данные и проверяет их структуру. После этого собирает названия столбцов из ключей словарей и записывает данные в CSV в виде таблицы.
 Если файл отсутствует или данные имеют неправильный формат, функция выдаёт ошибку.
+
+Возникающие ошибки:
+`FileNotFoundError("JSON file was not found")`
+`ValueError("The file is not in JSON format")`
+`ValueError("Empty file JSON")`
+`ValueError("The JSON file is empty or has an invalid format")`
+
 ```py
 import json
 import csv
@@ -64,6 +71,13 @@ def json_to_csv(json_path: str, csv_path: str) -> None:
 Функция `csv_to_json()` преобразует данные из CSV-файла в JSON-файл.
 Сначала она проверяет существование и формат CSV-файла, затем считывает данные и проверяет, что файл не пустой. После этого преобразует строки таблицы в список словарей и записывает их в JSON-файл.
 Если файл отсутствует, имеет неправильное расширение или не содержит данных, функция выдаёт ошибку.
+
+Возникающие ошибки:
+`FileNotFoundError("CSV file was not found")`
+`ValueError("The file is not in CSV format")`
+`ValueError("File CSV without fieldnames")`
+`ValueError("File CSV is empty")`
+
 ```py
 def csv_to_json(csv_path: str, json_path: str) -> None:
     '''
@@ -124,6 +138,12 @@ if __name__ == '__main__':
 Функция `csv_to_xlsx()` преобразует данные из CSV-файла в Excel-файл формата XLSX.
 Сначала она проверяет существование и формат CSV-файла, затем считывает данные и проверяет, что файл не пустой. После этого создаёт Excel-книгу, записывает в неё данные и автоматически настраивает ширину столбцов.
 Если файл отсутствует, имеет неправильное расширение или пустой, функция выдаёт ошибку.
+
+Возникающие ошибки:
+`FileNotFoundError("CSV file was not found")`
+`ValueError("The file is not in CSV format")`
+`ValueError("File CSV is empty")`
+
 ```py
 import csv
 from pathlib import Path
