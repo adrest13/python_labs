@@ -1,6 +1,6 @@
 ## ЛР5 — JSON и конвертации (JSON↔CSV, CSV→XLSX)
 
-## Задание A - `src/lab04/json_csv.py`
+## Задание A - `src/lab05/json_csv.py`
 
 ### Функция `json_to_csv.py`
 Функция `json_to_csv()` преобразует данные из JSON-файла в CSV-файл.
@@ -193,7 +193,7 @@ if __name__ == '__main__':
 <br>![](../../images/lab05/people_xlsx.png)<br>
 *Запись в XLSX-файл - вызов `csv_to_xlsx`*
 
-###Результаты
+### Результаты
 - `data/lab05/samples/people.json` — список людей в формате JSON
 - `data/lab05/samples/people.csv` — те же данные в формате CSV
 - `data/lab05/samples/cities.csv` — данные в формате CSV с городами
