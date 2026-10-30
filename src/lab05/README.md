@@ -215,7 +215,7 @@ if __name__ == '__main__':
 
 ### Результаты
 - `data/lab05/samples/people.json` — список людей в формате JSON
-- `data/lab05/samples/people.csv` — те же данные в формате CSV
+- `data/lab05/samples/people.csv` — список людей в формате CSV
 - `data/lab05/samples/cities.csv` — данные в формате CSV с городами
 - `data/lab05/out/people_from_json.csv` — результат функции `json_to_csv`
 - `data/lab05/out/people_from_csv.json` — результат функции `csv_to_json`
