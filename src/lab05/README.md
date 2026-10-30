@@ -8,10 +8,10 @@
 Если файл отсутствует или данные имеют неправильный формат, функция выдаёт ошибку.
 
 Возникающие ошибки:
-`FileNotFoundError("JSON file was not found")`
-`ValueError("The file is not in JSON format")`
-`ValueError("Empty file JSON")`
-`ValueError("The JSON file is empty or has an invalid format")`
+`FileNotFoundError("JSON file was not found")`<br>
+`ValueError("The file is not in JSON format")`<br>
+`ValueError("Empty file JSON")`<br>
+`ValueError("The JSON file is empty or has an invalid format")`<br>
 
 ```py
 import json
@@ -73,10 +73,10 @@ def json_to_csv(json_path: str, csv_path: str) -> None:
 Если файл отсутствует, имеет неправильное расширение или не содержит данных, функция выдаёт ошибку.
 
 Возникающие ошибки:
-`FileNotFoundError("CSV file was not found")`
-`ValueError("The file is not in CSV format")`
-`ValueError("File CSV without fieldnames")`
-`ValueError("File CSV is empty")`
+`FileNotFoundError("CSV file was not found")`<br>
+`ValueError("The file is not in CSV format")`<br>
+`ValueError("File CSV without fieldnames")`<br>
+`ValueError("File CSV is empty")`<br>
 
 ```py
 def csv_to_json(csv_path: str, json_path: str) -> None:
@@ -140,9 +140,9 @@ if __name__ == '__main__':
 Если файл отсутствует, имеет неправильное расширение или пустой, функция выдаёт ошибку.
 
 Возникающие ошибки:
-`FileNotFoundError("CSV file was not found")`
-`ValueError("The file is not in CSV format")`
-`ValueError("File CSV is empty")`
+`FileNotFoundError("CSV file was not found")`<br>
+`ValueError("The file is not in CSV format")`<br>
+`ValueError("File CSV is empty")`<br>
 
 ```py
 import csv
