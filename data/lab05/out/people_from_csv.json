@@ -1,10 +1,17 @@
 [
   {
-    "country": "Russia",
-    "city": "Moscow"
+    "name": "Kate",
+    "gpa": "18",
+    "favorite subject": "Math"
   },
   {
-    "country": "Germany",
-    "city": "Berlin"
+    "name": "David",
+    "gpa": "15",
+    "favorite subject": "PE"
+  },
+  {
+    "name": "Kostya",
+    "gpa": "11",
+    "favorite subject": "English"
   }
 ]
