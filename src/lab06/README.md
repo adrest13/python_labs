@@ -76,7 +76,7 @@ python -m src.lab06.cli_text --help
 python -m src.lab06.cli_convert --help
 ```
 ![](../../images/lab06/p1.png)<br>
-*Пример для `cli_text`*
+*Пример для `cli_text`*<br>
 Справка подкоманд:
 ```py
 python -m src.lab06.cli_text cat --help
@@ -86,9 +86,9 @@ python -m src.lab06.cli_convert csv2json --help
 python -m src.lab06.cli_convert csv2xlsx --help
 ```
 ![](../../images/lab06/p2.png)<br>
-*Пример для `cat`*
+*Пример для `cat`*<br>
 
-###Результаты
+### Результаты
 - `data/lab05/samples/people.json` — исходный JSON-файл с данными о людях
 - `data/lab05/samples/people.csv` — исходный CSV-файл с данными о людях
 - `data/lab05/samples/cities.csv` — исходный CSV-файл с данными о городах
