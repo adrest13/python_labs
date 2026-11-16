@@ -68,3 +68,69 @@ def insertion_sort(nums: list[int]) -> list[int]:
 
     return a
 
+
+def merge_sort(nums: list[int]) -> list[int]:
+    '''
+    Merge sort
+
+    Input: nums: list[int]
+    Output: list[int]
+
+    Complexity: O(n log n)
+    '''
+    a = nums.copy()
+    n = len(a)
+    step = 1
+
+    while step < n:
+        l = 0
+
+        while l < n:
+            mid = min(l + step, n)
+            r = min(mid + step, n)
+
+            m = []
+            i = l
+            j = mid
+
+            while i < mid or j < r:
+                if j >= r or (i < mid and a[i] <= a[j]):
+                    m.append(a[i])
+                    i += 1
+                else:
+                    m.append(a[j])
+                    j += 1
+
+            a[l:r] = m
+            l += 2 * step
+
+        step *= 2
+
+    return a
+
+
+
+def counting_sort(nums: list[int], l: int, r: int) -> list[int]:
+    '''
+    Counting sort
+
+    Complexity: O(n + k), k = (r - l)
+    '''
+    count = [0] * (r - l + 1)
+
+    for i in range(len(nums)):
+        index = nums[i] - l
+        count[index] += 1
+
+    res = []
+
+    value = l
+    while value <= r:
+        amount = count[value - l]
+
+        for i in range(amount):
+            res.append(value)
+
+        value += 1
+
+    return res

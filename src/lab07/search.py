@@ -68,6 +68,6 @@ def two_sum_fast(nums: list[int], target: int) -> tuple[int, int] | None:
         x = nums[i]
         y = target - x
         if y in s:
-            return (s[x], i)
+            return (s[y], i)
         s[x] = i
     return None
