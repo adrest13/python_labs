@@ -73,7 +73,7 @@ def main():
 
     check_two_sum()
 
-    print("Accepted")
+    print("OK")
 
 
 if __name__ == "__main__":
