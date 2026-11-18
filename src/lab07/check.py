@@ -1,75 +1,106 @@
 import random
 
-from src.lab07.sorting import bubble_sorted, insertion_sorted, selection_sorted, merge_sorted, counting_sorted
+from src.lab07.sorting import bubble_sort, insertion_sort, selection_sort, merge_sort, counting_sort
 from src.lab07.search import linear_search, binary_search, two_sum_brute, two_sum_fast
 
 
-def check_sorting(fn, trials=100) -> None:
+def check_sorting(sort_function, trials=100):
     for _ in range(trials):
-        nums = [random.randint(-100, 100) for z in range(random.randint(0, 50))]
-        old = nums.copy()
+        numbers = []
 
-        assert fn(nums) == sorted(nums)
-        assert nums == old
+        for i in range(random.randint(0, 50)):
+            numbers.append(random.randint(-100, 100))
+
+        old_numbers = numbers.copy()
+
+        result = sort_function(numbers)
+
+        assert result == sorted(old_numbers)
+        assert numbers == old_numbers
 
 
-def check_counting_sorted(fn, trials=100) -> None:
+def check_counting_sort(sort_function, trials=100):
     for _ in range(trials):
-        nums = [random.randint(-100, 100) for z in range(random.randint(0, 50))]
-        old = nums.copy()
+        numbers = []
 
-        assert fn(nums, -100, 100) == sorted(nums)
-        assert nums == old
+        for i in range(random.randint(0, 50)):
+            numbers.append(random.randint(-100, 100))
+
+        old_numbers = numbers.copy()
+
+        result = sort_function(numbers, -100, 100)
+
+        assert result == sorted(old_numbers)
+        assert numbers == old_numbers
 
 
-def check_search(fn, trials=100) -> None:
-    for i in range(trials):
-        nums = sorted(random.randint(-100, 100) for z in range(random.randint(0, 50)))
-        x = random.choice(nums) if nums and random.randint(0, 1) else 150
+def check_search(search_function, trials=100):
+    for _ in range(trials):
+        numbers = []
 
-        result = fn(nums, x)
+        for i in range(random.randint(0, 50)):
+            numbers.append(random.randint(-100, 100))
 
-        if x in nums:
-            assert 0 <= result < len(nums)
-            assert nums[result] == x
+        numbers.sort()
+
+        if len(numbers) > 0 and random.randint(0, 1) == 1:
+            x = random.choice(numbers)
+        else:
+            x = 150
+
+        result = search_function(numbers, x)
+
+        if x in numbers:
+            assert result >= 0
+            assert result < len(numbers)
+            assert numbers[result] == x
         else:
             assert result == -1
 
 
-def check_two_sum(trials=100) -> None:
-    for i in range(trials):
-        nums = [random.randint(-100, 100) for z in range(random.randint(0, 50))]
+def check_two_sum(trials=100):
+    for _ in range(trials):
+        numbers = []
 
-        if len(nums) >= 2 and random.randint(0, 1):
-            i, j = random.sample(range(len(nums)), 2)
-            target = nums[i] + nums[j]
+        for i in range(random.randint(0, 50)):
+            numbers.append(random.randint(-100, 100))
+
+        if len(numbers) >= 2 and random.randint(0, 1) == 1:
+            indexes = random.sample(range(len(numbers)), 2)
+
+            target = numbers[indexes[0]] + numbers[indexes[1]]
         else:
             target = 201
 
-        a = two_sum_brute(nums, target)
-        b = two_sum_fast(nums, target)
+        result1 = two_sum_brute(numbers, target)
+        result2 = two_sum_fast(numbers, target)
 
-        assert (a is None) == (b is None)
+        assert (result1 is None) == (result2 is None)
 
-        for result in (a, b):
-            if result is not None:
-                i, j = result
-                assert 0 <= i < len(nums)
-                assert 0 <= j < len(nums)
+        for pair in (result1, result2):
+            if pair is not None:
+                i, j = pair
+
+                assert i >= 0
+                assert i < len(numbers)
+                assert j >= 0
+                assert j < len(numbers)
                 assert i != j
-                assert nums[i] + nums[j] == target
+                assert numbers[i] + numbers[j] == target
 
 
 def main():
     random.seed(42)
 
-    for fn in (bubble_sorted, insertion_sorted, selection_sorted, merge_sorted):
-        check_sorting(fn)
+    check_sorting(bubble_sort)
+    check_sorting(insertion_sort)
+    check_sorting(selection_sort)
+    check_sorting(merge_sort)
 
-    check_counting_sorted(counting_sorted)
+    check_counting_sort(counting_sort)
 
-    for fn in (linear_search, binary_search):
-        check_search(fn)
+    check_search(linear_search)
+    check_search(binary_search)
 
     check_two_sum()
 

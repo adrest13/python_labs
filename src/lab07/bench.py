@@ -1,128 +1,114 @@
 import random
-import timeit
+import time
 import os
 
 from src.lab04.io_txt_csv import write_csv
-from src.lab07.sorting import (
-    bubble_sort, insertion_sort, selection_sort,
-    counting_sort, merge_sort
-)
-from src.lab07.search import (
-    linear_search, binary_search,
-    two_sum_brute, two_sum_fast
-)
+from src.lab07.sorting import bubble_sort, insertion_sort, selection_sort, counting_sort, merge_sort
+from src.lab07.search import linear_search, binary_search, two_sum_brute, two_sum_fast
 
 
-def measure(func, runs=1, repeats=5):
-    return min(timeit.repeat(func, number=runs, repeat=repeats)) / runs
+def benchmark(results, task, n, name, function, numbers, extra=(), runs=1, repeats=5):
+    if function is None:
+        results.append((task, n, name, "> 60.0"))
+        return
+
+    best = float("inf")
+
+    for i in range(repeats):
+        start = time.perf_counter()
+
+        for j in range(runs):
+            function(numbers.copy(), *extra)
+
+        finish = time.perf_counter()
+        seconds = (finish - start) / runs
+
+        if seconds < best:
+            best = seconds
+
+    results.append((task, n, name, best))
 
 
-def bench_sorts(n):
-    numbers = [random.randint(-10000, 10000) for _ in range(n)]
-    results = []
-
-    algorithms = {
-        "sorted": sorted,
-        "merge_sort": merge_sort,
-        "bubble_sort": bubble_sort,
-        "insertion_sort": insertion_sort,
-        "selection_sort": selection_sort
-    }
-
-    for name, func in algorithms.items():
-        if n >= 100000 and name in (
-            "bubble_sort", "insertion_sort", "selection_sort"
-        ):
-            seconds = "> 60.0"
-        else:
-            runs = 100 if name == "sorted" else 1
-            repeats = 1 if n >= 100000 else 5
-
-            seconds = measure(
-                lambda: func(numbers.copy()), runs, repeats
-            )
-
-        results.append(("sort", n, name, seconds))
-
-    return results
-
-
-def bench_counting():
-    n = 1000000
-    numbers = [random.randint(0, 100) for _ in range(n)]
-
-    return [
-        ("count", n, "sorted",
-         measure(lambda: sorted(numbers.copy()), 5, 3)),
-
-        ("count", n, "counting_sort",
-         measure(lambda: counting_sort(numbers.copy(), 0, 100), 5, 3))
-    ]
-
-
-def bench_search(n):
-    numbers = [random.randint(-100000, 100000) for _ in range(n)]
-    queries = [random.randint(-100000, 100000) for _ in range(10000)]
-
-    def run_search(func, data):
-        for value in queries:
-            func(data, value)
-
-    linear_time = measure(
-        lambda: run_search(linear_search, numbers), 1, 1
-    )
-
-    sort_time = measure(lambda: sorted(numbers), 1, 1)
-    ordered = sorted(numbers)
-
-    binary_time = measure(
-        lambda: run_search(binary_search, ordered), 10, 1
-    )
-
-    return [
-        ("search", n, "linear", linear_time),
-        ("search", n, "sort_only", sort_time),
-        ("search", n, "binary", binary_time)
-    ]
-
-
-def bench_two_sum(n):
-    numbers = random.sample(range(-100000, 100000), n)
-
-    i, j = random.sample(range(n), 2)
-    target = numbers[i] + numbers[j]
-
-    brute_time = measure(
-        lambda: two_sum_brute(numbers.copy(), target), 1, 1
-    )
-
-    fast_time = measure(
-        lambda: two_sum_fast(numbers.copy(), target), 100, 1
-    )
-
-    return [
-        ("sum", n, "two_sum_brute", brute_time),
-        ("sum", n, "two_sum_fast", fast_time)
-    ]
+def search_all(numbers, queries, function):
+    for x in queries:
+        function(numbers, x)
 
 
 def main():
     random.seed(42)
     results = []
 
-    print("Проверка сортировок...")
+    print("Сравнение пяти алгоритмов сортировки на разных размерах списков...")
+
+    algorithms = [
+        ("sorted", sorted),
+        ("merge_sort", merge_sort),
+        ("bubble_sort", bubble_sort),
+        ("insertion_sort", insertion_sort),
+        ("selection_sort", selection_sort)
+    ]
+
     for n in (1000, 10000, 100000):
-        results.extend(bench_sorts(n))
+        numbers = []
 
-    print("Проверка Counting Sort...")
-    results.extend(bench_counting())
+        for i in range(n):
+            numbers.append(random.randint(-10000, 10000))
 
-    print("Проверка поиска...")
-    results.extend(bench_search(100000))
+        for name, function in algorithms:
+            runs = 1
+            repeats = 5
 
-    print("Проверка Two Sum...")
+            if name == "sorted":
+                runs = 100
+
+            if n == 100000:
+                repeats = 1
+
+            if n == 100000 and name in ("bubble_sort", "insertion_sort", "selection_sort"):
+                function = None
+
+            benchmark(results, "sort", n, name, function, numbers, runs=runs, repeats=repeats)
+
+    print("Сравнение встроенной сортировки Python и сортировки подсчётом...")
+
+    n = 1000000
+    numbers = []
+
+    for i in range(n):
+        numbers.append(random.randint(0, 100))
+
+    benchmark(results, "count", n, "sorted", sorted, numbers, runs=5, repeats=3)
+    benchmark(results, "count", n, "counting_sort", counting_sort, numbers, (0, 100), 5, 3)
+
+    print("Сравнение линейного и бинарного поиска...")
+
+    n = 100000
+    numbers = []
+    queries = []
+
+    for i in range(n):
+        numbers.append(random.randint(-100000, 100000))
+
+    for i in range(10000):
+        queries.append(random.randint(-100000, 100000))
+
+    benchmark(results, "search", n, "linear", search_all, numbers, (queries, linear_search), 1, 1)
+    benchmark(results, "search", n, "sort_only", sorted, numbers, runs=1, repeats=1)
+
+    ordered = sorted(numbers)
+
+    benchmark(results, "search", n, "binary", search_all, ordered, (queries, binary_search), 10, 1)
+
+    print("Сравнение полного перебора и быстрого алгоритма Two Sum...")
+
     for n in (1000, 10000):
-        results.extend(bench_two_sum(n))
+        numbers = random.sample(range(-100000, 100000), n)
+
+        indexes = random.sample(range(n), 2)
+        target = numbers[indexes[0]] + numbers[indexes[1]]
+
+        benchmark(results, "sum", n, "two_sum_brute", two_sum_brute, numbers, (target,), 1, 1)
+        benchmark(results, "sum", n, "two_sum_fast", two_sum_fast, numbers, (target,), 100, 1)
 
     print(f"\n{'task':<10} | {'n':<10} | {'impl':<15} | seconds")
     print("-" * 55)
